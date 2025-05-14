@@ -8,6 +8,5 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY Project_Heroku.py .
-
-CMD ["python", "Project_Heroku.py"]
+COPY app.py .
+CMD ["python", "app.py"]
