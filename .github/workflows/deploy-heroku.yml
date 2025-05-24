@@ -40,5 +40,5 @@ jobs:
 
       - name: Verify deployment (curl app)
         run: |
-          echo "Opening app at https://jessi-helloworld1-app-2222de5e8009.herokuapp.comS"
+          echo "Opening app at https://jessi-helloworld1-app-2222de5e8009.herokuapp.com"
           curl -I https://jessi-helloworld1-app-2222de5e8009.herokuapp.com
