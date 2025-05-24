@@ -21,18 +21,18 @@ jobs:
 
       - name: Build Docker image for Heroku
         run: |
-          docker build -t registry.heroku.com/jessi-helloworld1-app-2222de5e8009/web .
+          docker build -t registry.heroku.com/jessi-helloworld1-app/web .
 
       - name: Push Docker image to Heroku
         run: |
-          docker push registry.heroku.com/jessi-helloworld1-app-2222de5e8009/web
+          docker push registry.heroku.com/jessi-helloworld1-app/web
 
       - name: Release the app on Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          IMAGE_ID=$(docker inspect registry.heroku.com/jessi-helloworld1-app-2222de5e8009/web --format='{{.Id}}')
-          curl -n -X PATCH https://api.heroku.com/apps/jessi-helloworld1-app-2222de5e8009/formation \
+          IMAGE_ID=$(docker inspect registry.heroku.com/jessi-helloworld1-app/web --format='{{.Id}}')
+          curl -n -X PATCH https://api.heroku.com/apps/jessi-helloworld1-app/formation \
             -d '{ "updates": [ { "type": "web", "docker_image": "'"$IMAGE_ID"'" } ] }' \
             -H "Content-Type: application/json" \
             -H "Accept: application/vnd.heroku+json; version=3.docker-releases" \
@@ -40,5 +40,5 @@ jobs:
 
       - name: Verify deployment (curl app)
         run: |
-          echo "Opening app at https://jessi-helloworld1-app-2222de5e8009.herokuapp.com"
+          echo "Opening app at https://jessi-helloworld1-app-2222de5e8009.herokuapp.comS"
           curl -I https://jessi-helloworld1-app-2222de5e8009.herokuapp.com
