@@ -17,7 +17,8 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com
+          echo HRKU-AACVOnPVBnNbiSLT9ONjdNYWqA0XLcQnKC63cqiD-G4A_____w3S9bNwgg2u | docker login --username=_ --password-stdin registry.heroku.com
+
 
       - name: Build Docker image for Heroku
         run: |
