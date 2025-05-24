@@ -17,8 +17,7 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          echo HRKU-AACVOnPVBnNbiSLT9ONjdNYWqA0XLcQnKC63cqiD-G4A_____w3S9bNwgg2u | docker login --username=_ --password-stdin registry.heroku.com
-
+          echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com
 
       - name: Build Docker image for Heroku
         run: |
@@ -34,12 +33,12 @@ jobs:
         run: |
           IMAGE_ID=$(docker inspect registry.heroku.com/jessi-helloworld1-app/web --format='{{.Id}}')
           curl -n -X PATCH https://api.heroku.com/apps/jessi-helloworld1-app/formation \
-          -d '{ "updates": [ { "type": "web", "docker_image": "'"$IMAGE_ID"'" } ] }' \
-          -H "Content-Type: application/json" \
-          -H "Accept: application/vnd.heroku+json; version=3.docker-releases" \
-          -H "Authorization: Bearer $HEROKU_API_KEY"
+            -d '{ "updates": [ { "type": "web", "docker_image": "'"$IMAGE_ID"'" } ] }' \
+            -H "Content-Type: application/json" \
+            -H "Accept: application/vnd.heroku+json; version=3.docker-releases" \
+            -H "Authorization: Bearer $HEROKU_API_KEY"
 
-      - name: Open Heroku app (verify deployment)
+      - name: Verify deployment (curl app)
         run: |
           echo "Opening app at https://jessi-helloworld1-app.herokuapp.com"
           curl -I https://jessi-helloworld1-app.herokuapp.com
