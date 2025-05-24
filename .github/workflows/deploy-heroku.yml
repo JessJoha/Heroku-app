@@ -33,14 +33,6 @@ jobs:
         run: |
           echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com
 
-      - name: Tag Docker image for Heroku
-        run: |
-          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/heroku-app registry.heroku.com/jessi-helloword1-app/web
-
-      - name: Push Docker image to Heroku Container Registry
-        run: |
-          docker push registry.heroku.com/jessi-helloword1-app/web
-
       - name: Release the app on Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
